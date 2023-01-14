@@ -111,8 +111,8 @@ class Enemy(Sprite):
         self.accelerate(self.accel_x, self.accel_y)
 
     def rotateSelf(self):
-        # Rotate facing player
-        self.rotationAngle = self.distanceXY.as_polar()[1]
+        # Rotate facing direction of velocity
+        self.rotationAngle = self.velocity.as_polar()[1]
         self.image = pygame.transform.rotozoom(self.original_image, -self.rotationAngle, 1)
 
     def getTravelDirection(self):
@@ -122,6 +122,19 @@ class Enemy(Sprite):
         # Create a vector that describes the x and y distance to player
         self.distanceXY = Vector2((self.player_rect_center[0] - self.rect.centerx, self.player_rect_center[1] - self.rect.centery))
     
+    def update(self):
+        # Update the mask
+        self.mask = pygame.mask.from_surface(self.image)
+
+        # Get direction of travel, move towards that direction and rotate self according to direction
+        self.getTravelDirection()
+        self.moveTowards(self.distanceXY)
+        self.rotateSelf()
+
+        # Check collisions with player bullets. Destroy self after its HP reaches 0 or below
+        self.checkCollisions()
+        self.destroyZeroHP()
+
 
 class Triangle(Enemy):
     def __init__(self, game):
@@ -139,22 +152,6 @@ class Triangle(Enemy):
 
         # Inherit from Enemy
         super().__init__(game)
-
-
-    def update(self):
-        # Update the mask
-        self.mask = pygame.mask.from_surface(self.image)
-
-        # Get direction of travel, move towards that direction and rotate self according to direction
-        self.getTravelDirection()
-        self.moveTowards(self.distanceXY)
-        self.rotateSelf()
-
-        # Check collisions with player bullets. Destroy self after its HP reaches 0 or below
-        self.checkCollisions()
-        self.destroyZeroHP()
-
-
 
 class Rectangle(Enemy):
     def __init__(self, game):
@@ -189,6 +186,12 @@ class Rectangle(Enemy):
 
             # Set last tick to the value of current tick
             self.lastShotTick = self.shootNow
+
+
+    def rotateSelf(self):
+        # Rotate facing player
+        self.rotationAngle = self.distanceXY.as_polar()[1]
+        self.image = pygame.transform.rotozoom(self.original_image, -self.rotationAngle, 1)
 
 
     def update(self):
