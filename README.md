@@ -73,6 +73,14 @@ The obtained angle is then used to rotate the original_image by its negative (be
 
 ### Simple Enemy AI
 
+The enemy's goal is to reach the player in order to deal damage to the player. In order to create an AI that does that, I made a function that keeps track of the distance from the enemy to the player. 
+
+Then that distance vector is normalized into a circle with a radius equal to the enemy's acceleration threshold (maximum acceleration) so that the resultant acceleration does not change much when the enemy accelerates diagonally. 
+
+The enemy will then accelerate towards the direction where the player is relative to it based on the normalized vector. 
+
+For the rectangle enemy, I made it so that it will fire bullets to the player's direction on a cooldown.
+
 ---
 ## Screenshots of your application
 
