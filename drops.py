@@ -58,7 +58,7 @@ class EnemyDrop(Sprite):
     
         if pygame.sprite.spritecollide(self, self.enemy.game.player, False, pygame.sprite.collide_mask):
             if buff == "increaseDmg":
-                self.settings.pBullet_rawDamage *= 1.8
+                self.settings.pBullet_rawDamage *= 2.1
             
             elif buff == "increaseBulletSpeed":
                 if self.settings.pBullet_speed <= 30:
