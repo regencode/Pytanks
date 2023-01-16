@@ -3,7 +3,7 @@
 
 ## Brief Description
 
-Pytanks is a endless top-down shooter where you control the player using WASD keys and the mouse. The goal is to survive as long as you can, with increasing difficulty and harder enemies as you stay alive for longer. Level up and collect buffs dropped by enemies in order to upgrade your damage, fire rate, bullet speed and movement speed.
+Pytanks is a endless top-down survival shooter where you control the player using WASD keys and the mouse. The goal is to survive as long as you can, with increasing difficulty and harder enemies as you stay alive for longer. Level up and collect buffs dropped by enemies in order to upgrade your damage, fire rate, bullet speed and movement speed.
 
 
 ---
@@ -94,7 +94,7 @@ The way the enemy rotation works is simple, it will rotate to the angle of the p
 
 
 
-### Simple Enemy AI
+### Simple Enemy AI and movement
 
 The enemy's goal is to reach the player in order to deal damage to the player. In order to create an AI that does that, I made a function that keeps track of the distance from the enemy to the player. 
 
